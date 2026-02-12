@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+<title>Nexus · contact</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<style>
+/* === COPY ROOT + BODY STYLES FROM PRIVACY PAGE === */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+--bg-primary:#0c0c12;
+--accent-primary:#7c5cfc;
+--accent-soft:#9575ff;
+--text-primary:#f2f2fd;
+--text-secondary:#c8c8dc;
+--shadow:0 24px 44px -16px rgba(0,0,0,0.5);
+--transition:all .22s cubic-bezier(.18,.89,.32,1.1);
+--card-max:1100px;
+}
+body{
+font-family:'Inter',sans-serif;
+background:radial-gradient(circle at 20% 30%,#12121a,#08080c);
+color:var(--text-primary);
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:1.5rem 1rem 2.5rem;
+}
+.container{width:100%;max-width:var(--card-max);}
+
+.header{text-align:center;margin-bottom:2rem;}
+.logo{display:flex;align-items:center;justify-content:center;gap:.6rem;text-decoration:none;}
+.logo-icon{
+width:50px;height:50px;
+background:linear-gradient(145deg,#8466f0,#5f8aff);
+border-radius:20px;
+display:flex;align-items:center;justify-content:center;
+font-size:1.8rem;color:white;
+}
+.logo-text{
+font-family:'Space Grotesk',sans-serif;
+font-size:2.4rem;font-weight:600;
+background:linear-gradient(to right,#fff,#dbd4ff);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.contact-card{
+background:rgba(24,24,36,.85);
+backdrop-filter:blur(16px);
+border-radius:48px;
+padding:2.5rem;
+box-shadow:var(--shadow);
+position:relative;
+}
+.contact-card::after{
+content:'';
+position:absolute;top:0;left:0;width:100%;height:6px;
+background:linear-gradient(95deg,#a07dfa,#6aa5ff);
+border-radius:48px 48px 0 0;
+}
+
+.contact-title{
+font-family:'Space Grotesk',sans-serif;
+font-size:1.9rem;
+margin-bottom:2rem;
+display:flex;
+align-items:center;
+gap:.7rem;
+}
+
+.contact-grid{
+display:flex;
+flex-direction:column;
+gap:1.5rem;
+}
+
+.contact-item{
+background:rgba(16,16,24,.6);
+padding:1.5rem;
+border-radius:32px;
+display:flex;
+gap:1rem;
+align-items:flex-start;
+transition:var(--transition);
+}
+.contact-item:hover{
+background:rgba(30,30,44,.8);
+}
+
+.contact-icon{
+font-size:1.7rem;
+color:var(--accent-soft);
+min-width:2.5rem;
+}
+
+.contact-text{
+color:var(--text-secondary);
+}
+
+.contact-text a{
+color:#b3a0ff;
+text-decoration:none;
+}
+
+.back-link{
+margin-top:2.5rem;
+text-align:center;
+}
+.back-link a{
+display:inline-flex;
+align-items:center;
+gap:.6rem;
+background:#1c1c2a;
+padding:1rem 2rem;
+border-radius:60px;
+color:white;
+text-decoration:none;
+}
+
+.footer{
+text-align:center;
+margin-top:3rem;
+color:#8282aa;
+font-size:.85rem;
+}
+.footer-links{
+display:flex;
+justify-content:center;
+gap:1.2rem;
+margin-top:.5rem;
+}
+.footer-links a{
+color:#9c9cc0;
+text-decoration:none;
+}
+.footer-links a:hover{color:white;}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header">
+<a href="index.html" class="logo">
+<div class="logo-icon"><i class="fas fa-cloud-arrow-down"></i></div>
+<div class="logo-text">Nexus</div>
+</a>
+</header>
+
+<div class="contact-card">
+<div class="contact-title">
+<i class="fas fa-envelope"></i>
+<span>contact · please reach out</span>
+</div>
+
+<div class="contact-grid">
+
+<div class="contact-item">
+<div class="contact-icon"><i class="fas fa-paper-plane"></i></div>
+<div class="contact-text">
+<strong>Email</strong><br>
+<a href="mailto:frontcoda@gmail.com">frontcoda@gmail.com</a>
+</div>
+</div>
+
+<div class="contact-item">
+<div class="contact-icon"><i class="fab fa-twitter"></i></div>
+<div class="contact-text">
+<strong>Twitter / X</strong><br>
+<a href="https://x.com/frntend_dev">@frntend_dev</a>
+</div>
+</div>
+
+<div class="contact-item">
+<div class="contact-icon"><i class="fab fa-tiktok"></i></div>
+<div class="contact-text">
+<strong>Tiktok</strong><br>
+<a href="https://vm.tiktok.com/ZS9JxeYMuN6q9-sTmc9/">@frnt_coda</a>
+</div>
+</div>
+
+</div>
+
+<div class="back-link">
+<a href="index.html"><i class="fas fa-arrow-left"></i> back to Nexus</a>
+</div>
+
+</div>
+
+<footer class="footer">
+<p>Developed by an indie dev.</p>
+<div class="footer-links">
+<a href="terms.html">terms</a>
+<a href="privacy.html">privacy</a>
+<a href="contact.html" style="color:#ddd9ff;border-bottom:1px solid #7c5cfc;">contact</a>
+</div>
+</footer>
+
+</div>
+</body>
+</html>
