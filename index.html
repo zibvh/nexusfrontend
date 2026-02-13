@@ -91,7 +91,51 @@
     --transition: all 0.22s cubic-bezier(0.18, 0.89, 0.32, 1.1);
     --card-max: 1100px;
 }
+.faq-item {
+    margin-bottom: 1rem;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(16,16,24,0.6);
+    border: 1px solid rgba(255,255,255,0.03);
+}
 
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question::after {
+    content: "+";
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+
+.faq-item.active .faq-question::after {
+    content: "−";
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: #c8c8dc;
+    padding: 0 1.5rem;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 0 1.5rem 1.2rem;
+}
 body {
     font-family: 'Inter', -apple-system, sans-serif;
     background: radial-gradient(circle at 20% 30%, #12121a, #08080c);
@@ -670,6 +714,12 @@ video, audio, img {
     });
 
 })();
+document.querySelectorAll(".faq-question").forEach(button => {
+    button.addEventListener("click", () => {
+        const item = button.parentElement;
+        item.classList.toggle("active");
+    });
+});
 </script>
 </body>
 </html>
