@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus · Buy me a Coffe</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+--bg-primary:#0c0c12;
+--accent-primary:#7c5cfc;
+--accent-soft:#9575ff;
+--text-primary:#f2f2fd;
+--text-secondary:#c8c8dc;
+--shadow:0 24px 44px -16px rgba(0,0,0,0.5);
+--transition:all .22s cubic-bezier(.18,.89,.32,1.1);
+--card-max:1100px;
+}
+body{
+font-family:'Inter',sans-serif;
+background:radial-gradient(circle at 20% 30%,#12121a,#08080c);
+color:var(--text-primary);
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:2rem 1rem 3rem;
+}
+.container{width:100%;max-width:var(--card-max);}
+.header{text-align:center;margin-bottom:2rem;}
+.logo{display:flex;align-items:center;justify-content:center;gap:.6rem;text-decoration:none;}
+.logo-icon{width:50px;height:50px;background:linear-gradient(145deg,#8466f0,#5f8aff);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:white;}
+.logo-text{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;font-weight:600;background:linear-gradient(to right,#fff,#dbd4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+.support-card{
+background:rgba(24,24,36,.85);
+backdrop-filter:blur(16px);
+border-radius:48px;
+padding:3rem 2.5rem;
+box-shadow:var(--shadow);
+width:100%;
+position:relative;
+}
+.support-card::after{
+content:'';
+position:absolute;top:0;left:0;width:100%;height:6px;
+background:linear-gradient(95deg,#a07dfa,#6aa5ff);
+border-radius:48px 48px 0 0;
+}
+
+.support-title{
+font-family:'Space Grotesk',sans-serif;
+font-size:2rem;
+margin-bottom:.8rem;
+text-align:center;
+}
+.support-sub{
+color:var(--text-secondary);
+text-align:center;
+margin-bottom:2rem;
+}
+.input-wrapper{
+display:flex;
+gap:.8rem;
+justify-content:center;
+flex-wrap:wrap;
+margin-bottom:2rem;
+}
+.amount-input, .currency-select{
+padding:1rem 1.2rem;
+border-radius:60px;
+border:none;
+font-size:1.1rem;
+outline:none;
+background:rgba(16,16,24,.6);
+color:white;
+}
+.amount-input{width:150px; max-width:80%;}
+.currency-select{width:120px; cursor:pointer;}
+.pay-btn{
+padding:1rem 2rem;
+border:none;
+border-radius:60px;
+font-size:1.1rem;
+font-weight:600;
+background:linear-gradient(165deg,#775be0,#5f8af0);
+color:white;
+cursor:pointer;
+transition:.2s;
+}
+.pay-btn:hover{transform:translateY(-3px);}
+.back{
+margin-top:2rem;text-align:center;
+}
+.back a{color:#b3a0ff;text-decoration:none;}
+.footer{
+text-align:center;
+margin-top:3rem;
+color:#8282aa;
+font-size:.85rem;
+}
+
+@media(max-width:480px){
+.input-wrapper{flex-direction:column;align-items:center;}
+.amount-input, .currency-select{width:100%;}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header">
+<a href="index.html" class="logo">
+<div class="logo-icon"><i class="fas fa-cloud-arrow-down"></i></div>
+<div class="logo-text">Nexus</div>
+</a>
+</header>
+
+<div class="support-card">
+
+<h2 class="support-title">Buy Me A Coffe</h2>
+<p class="support-sub">
+If Nexus helped you, fuel the project with any amount you like. Small or big, it’s all love 
+</p>
+
+<div class="input-wrapper">
+<input type="number" id="custom-amount" class="amount-input" placeholder="Amount" min="1">
+<select id="currency" class="currency-select">
+<option value="NGN" selected>NGN</option>
+<option value="USD">USD</option>
+<option value="EUR">EUR</option>
+</select>
+<button class="pay-btn" onclick="payCustomAmount()">Support</button>
+</div>
+
+<div class="back">
+<a href="index.html">← back to Nexus</a>
+</div>
+
+</div>
+
+<footer class="footer">
+Made with ❤️ by frNtcOda • you can call me zibah if youre a supporter :) •  iykyk
+</footer>
+
+</div>
+
+<!-- PAYSTACK SCRIPT -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+function payCustomAmount(){
+    const amountInput = document.getElementById('custom-amount').value.trim();
+    const currency = document.getElementById('currency').value;
+    const amount = parseFloat(amountInput);
+
+    if(!amount || amount <= 0){
+        alert("Please enter a valid amount 💡");
+        return;
+    }
+
+    let handler = PaystackPop.setup({
+        key: "YOUR_PUBLIC_PAYSTACK_KEY", // replace this
+        email: "customer@email.com", // can prompt later
+        amount: currency === "NGN" ? amount * 100 : amount * 100, // Paystack expects kobo for NGN, minor units for others
+        currency: currency,
+        ref: "NEXUS_" + Math.floor((Math.random()*1000000000)+1),
+        callback: function(response){
+            alert("Thanks for supporting! Ref: " + response.reference);
+        },
+        onClose: function(){
+            alert("Payment cancelled.");
+        }
+    });
+    handler.openIframe();
+}
+</script>
+</body>
+</html>
