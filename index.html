@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Nexus",
+  "url": "https://nexus-eoxh.onrender.com/",
+  "description": "A fast and clean media downloader for public video and audio links.",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "All",
+  "creator": {
+    "@type": "Person",
+    "name": "hephzibah"
+  }
+}
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Nexus • fetch your content with ease</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0c0c12;
+    --bg-secondary: #191921;
+    --bg-tertiary: #252530;
+    --accent-primary: #7c5cfc;
+    --accent-soft: #9575ff;
+    --accent-secondary: #5fa5ff;
+    --text-primary: #f2f2fd;
+    --text-secondary: #c8c8dc;
+    --text-tertiary: #9696b0;
+    --success: #2ad4b6;
+    --error: #ff95a8;
+    --border-radius: 32px;
+    --border-radius-sm: 20px;
+    --border-radius-lg: 40px;
+    --shadow: 0 24px 44px -16px rgba(0,0,0,0.5);
+    --shadow-accent: 0 16px 40px -12px rgba(124, 92, 252, 0.25);
+    --transition: all 0.22s cubic-bezier(0.18, 0.89, 0.32, 1.1);
+    --card-max: 1100px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: radial-gradient(circle at 20% 30%, #12121a, #08080c);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.2rem 1rem 2.5rem;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--card-max);
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(145deg, #8466f0, #5f8aff);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    box-shadow: 0 12px 24px -8px rgba(124, 92, 252, 0.4);
+    transform: rotate(-2deg);
+    transition: transform 0.2s;
+}
+
+.logo:hover .logo-icon {
+    transform: rotate(1deg) scale(1.02);
+}
+
+.logo-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    background: linear-gradient(to right, #ffffff, #dbd4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #b6b6d6;
+    font-weight: 340;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: inline-block;
+    padding-bottom: 0.3rem;
+}
+
+.main-card {
+    position: relative;
+    background: rgba(24, 24, 36, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 48px;
+    padding: 2.6rem 2.8rem;
+    box-shadow: var(--shadow);
+    width: 100%;
+    transition: var(--transition);
+}
+
+.main-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(95deg, #a07dfa, #6aa5ff);
+    border-radius: 48px 48px 0 0;
+}
+
+/* INPUT */
+
+.input-section { margin-bottom: 2rem; }
+
+.input-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    margin-bottom: 0.8rem;
+    color: #cacae2;
+    text-transform: uppercase;
+}
+
+.url-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(16, 16, 24, 0.7);
+    border-radius: 100px;
+    padding: 0.2rem;
+    border: 1.2px solid rgba(255,255,255,0.02);
+    transition: 0.2s;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.5);
+}
+
+.url-input-wrapper:focus-within {
+    border-color: rgba(124, 92, 252, 0.5);
+    background: #1e1e2e;
+    box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.1);
+}
+
+.url-input-icon {
+    padding: 0 1.2rem 0 1.4rem;
+    color: #9e9ec2;
+    font-size: 1.1rem;
+}
+
+.url-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 1.2rem 0.5rem 1.2rem 0;
+    font-size: 1.1rem;
+    color: white;
+    outline: none;
+}
+
+.url-input::placeholder {
+    color: #6d6d92;
+    font-size: 1rem;
+}
+
+/* BUTTON */
+
+.download-button {
+    width: 100%;
+    padding: 1.4rem 1.6rem;
+    background: linear-gradient(165deg, #775be0, #5f8af0);
+    border: none;
+    border-radius: 100px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.18s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.download-button:hover {
+    transform: scale(1.01) translateY(-3px);
+}
+
+.download-button:active {
+    transform: scale(0.98);
+}
+
+.spinner {
+    display: none;
+    width: 1.3rem;
+    height: 1.3rem;
+    border: 3px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.85s infinite linear;
+}
+
+.download-button.loading .spinner { display: block; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* MEDIA */
+
+.media-container {
+    display: none;
+    margin-top: 2.2rem;
+    width: 100%;
+    animation: mediaFade 0.5s ease;
+}
+
+@keyframes mediaFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.media-card {
+    background: rgba(20, 20, 30, 0.6);
+    border-radius: 32px;
+    padding: 1.8rem;
+    border: 1px solid rgba(255,255,255,0.04);
+    width: 100%;
+}
+
+.media-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.media-preview {
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #0a0a12;
+    margin-bottom: 1.4rem;
+}
+
+video, audio, img {
+    width: 100%;
+    display: block;
+    border-radius: 24px;
+}
+
+.direct-download-btn {
+    width: 100%;
+    background: #7c5cf0;
+    border: none;
+    color: white;
+    padding: 1rem 1.6rem;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* SUPPORTED */
+
+.supported-platforms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+.platform {
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 60px;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: #8282aa;
+    font-size: 0.85rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+@media (max-width: 768px) {
+    .main-card { padding: 2rem 1.6rem; border-radius: 38px; }
+}
+
+@media (max-width: 600px) {
+    .logo-text { font-size: 1.8rem; }
+    .logo-icon { width: 42px; height: 42px; font-size: 1.4rem; }
+    .tagline { font-size: 0.95rem; }
+
+    .download-button {
+        font-size: 1.05rem;
+        padding: 1.2rem 1.4rem;
+    }
+
+    .media-card {
+        padding: 1.4rem 1.2rem;
+        border-radius: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .platform {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.8rem;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-cloud-arrow-down"></i></div>
+                <div class="logo-text">Nexus</div>
+            </div>
+            <p class="tagline">download your media with ease</p>
+        </header>
+
+        <main class="main-card" style="position:relative;">
+            <div class="input-section">
+                <label for="url-input" class="input-label">⤻ paste any media link</label>
+                <div class="url-input-wrapper">
+                    <div class="url-input-icon"><i class="fa-solid fa-link"></i></div>
+                    <input type="text" id="url-input" class="url-input" 
+                           placeholder="youtube, tiktok, X, etc" 
+                           autocomplete="off" autofocus>
+                </div>
+            </div>
+
+            <button id="fetch-button" class="download-button">
+                <span class="spinner"></span>
+                <span class="button-text">→ fetch & play</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <div class="supported-platforms">
+                <span class="platform"><i class="fab fa-youtube" style="color:#ff8080;"></i> YouTube</span>
+                <span class="platform"><i class="fab fa-tiktok" style="color:#7be0d9;"></i> TikTok</span>
+                <span class="platform"><i class="fab fa-instagram" style="color:#fc9ead;"></i> Instagram</span>
+                <span class="platform"><i class="fab fa-twitter" style="color:#90ceff;"></i> Twitter/X</span>
+                <span class="platform"><i class="fa-solid fa-music" style="color:#c9acff;"></i> audio</span>
+            </div>
+
+
+            <div id="media-container" class="media-container">
+                <div class="media-card">
+                    <div class="media-header">
+                        <span class="media-type-badge" id="media-badge">
+                            <i class="fas fa-video"></i> detected media
+                        </span>
+                        <span id="reset-direct" class="reset-link" onclick="window.location.reload()">↻ new link</span>
+                    </div>
+                    
+                    <!-- preview -->
+                    <div id="media-preview" class="media-preview"></div>
+                    
+                    <!-- download -->
+                    <div id="direct-download-area" style="display:flex; justify-content:center;">
+                        <button id="direct-save-btn" class="direct-download-btn">
+                            <i class="fas fa-download"></i> save media
+                        </button>
+                    </div>
+                    <p style="color:#a8a8d0; font-size:0.85rem; margin-top:1.2rem; text-align:center;">
+                        <i class="fas fa-check-circle" style="color:#62d9b0;"></i> fetched directly from link
+                    </p>
+                </div>
+            </div>
+
+            <!-- status/error/no format -->
+            <div id="fetch-status" style="display:none; margin-top:2rem;"></div>
+        </main>
+
+        <footer class="footer">
+            <p>Developed by an indie dev. </p>
+            <p>Support me by <a href="pay.html">Buying me a coffe</a> </p>
+            <div class="footer-links">
+                <a href="terms.html" class="footer-link">terms</a>
+                <a href="privacy.html" class="footer-link">privacy</a>
+                <a href="contact.html" class="footer-link">contact</a>
+            </div>
+        </footer>
+    </div>
+
+<script>
+(function () {
+    "use strict";
+
+    const urlInput = document.getElementById("url-input");
+    const fetchBtn = document.getElementById("fetch-button");
+    const mediaContainer = document.getElementById("media-container");
+    const mediaPreview = document.getElementById("media-preview");
+    const mediaBadge = document.getElementById("media-badge");
+    const fetchStatus = document.getElementById("fetch-status");
+
+    let isFetching = false;
+
+    function isValidUrl(str) {
+        try {
+            new URL(str);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    function resetMediaView() {
+        mediaContainer.style.display = "none";
+        mediaPreview.innerHTML = "";
+        fetchStatus.style.display = "none";
+    }
+
+    function showFetchError(message) {
+        fetchStatus.style.display = "block";
+        fetchStatus.innerHTML = `
+            <div style="background:#2a1e28;border-radius:36px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(255,120,120,0.1);">
+                <div style="font-size:2.5rem;color:#ff9aab;margin-bottom:1rem;">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3 style="margin-bottom:0.5rem;color:#ffb8c5;">Download failed</h3>
+                <p style="color:#d0d0ec;margin-bottom:1.4rem;">${message}</p>
+                <button onclick="window.location.reload()" 
+                        style="background:#48486a;border:none;color:white;padding:0.9rem 2rem;border-radius:60px;font-weight:600;">
+                        Try again
+                </button>
+            </div>
+        `;
+    }
+
+    async function handleFetch() {
+        const url = urlInput.value.trim();
+
+        if (!url) {
+            showFetchError("Please paste a link.");
+            return;
+        }
+
+        if (!isValidUrl(url)) {
+            showFetchError("That doesn't look like a valid URL.");
+            return;
+        }
+
+        if (isFetching) return;
+
+        isFetching = true;
+        fetchBtn.classList.add("loading");
+        fetchBtn.disabled = true;
+        resetMediaView();
+
+        try {
+            const response = await fetch("https://nexus-backend-production-4676.up.railway.app/download", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ url })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => null);
+                throw new Error(errorData?.error || "Server error occurred.");
+            }
+
+            const blob = await response.blob();
+
+            let filename = "media.mp4";
+            const disposition = response.headers.get("Content-Disposition");
+
+            if (disposition && disposition.includes("filename=")) {
+                const match = disposition.match(/filename="?(.+?)"?$/);
+                if (match && match[1]) {
+                    filename = match[1];
+                }
+            }
+
+            const downloadUrl = window.URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = downloadUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            window.URL.revokeObjectURL(downloadUrl);
+
+        } catch (error) {
+            showFetchError(error.message || "Unable to fetch media.");
+        } finally {
+            isFetching = false;
+            fetchBtn.classList.remove("loading");
+            fetchBtn.disabled = false;
+        }
+    }
+
+    fetchBtn.addEventListener("click", handleFetch);
+    urlInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleFetch();
+    });
+
+})();
+</script>
+</body>
+</html>
