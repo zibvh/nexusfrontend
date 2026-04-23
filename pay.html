@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8E2M9RSK0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -135,7 +134,7 @@ font-size:.85rem;
 
 <h2 class="support-title">Buy Me A Coffe</h2>
 <p class="support-sub">
-If Nexus helped you, fuel the project with any amount you like. Small or big, it’s all love 
+If Nexus helped you, fuel the project with any amount you like. Small or big, it's all love 
 </p>
 
 <div class="input-wrapper">
@@ -160,7 +159,6 @@ Made with ❤️ by frNtcOda • you can call me zibah if youre a supporter :) �
 
 </div>
 
-<!-- PAYSTACK SCRIPT -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
 function payCustomAmount(){
@@ -174,9 +172,9 @@ function payCustomAmount(){
     }
 
     let handler = PaystackPop.setup({
-        key: "YOUR_PUBLIC_PAYSTACK_KEY", // replace this
-        email: "customer@email.com", // can prompt later
-        amount: currency === "NGN" ? amount * 100 : amount * 100, // Paystack expects kobo for NGN, minor units for others
+        key: "YOUR_PUBLIC_PAYSTACK_KEY",
+        email: "customer@email.com",
+        amount: currency === "NGN" ? amount * 100 : amount * 100,
         currency: currency,
         ref: "NEXUS_" + Math.floor((Math.random()*1000000000)+1),
         callback: function(response){
